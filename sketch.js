@@ -95,6 +95,7 @@ frames = [frame1, frame2, frame3, frame4];
   input.size(100);
   input.style('height', '40px');
   textAlign(CENTER, BASELINE);  
+
   
   retake = createButton('Again!');
   retake.position(1500, 450);
@@ -119,8 +120,9 @@ function draw() {
     forYouMsg();
     return;
   }
+  
 
-  // Dithering selfie
+//   // Dithering selfie
   background(255); 
   video.loadPixels();
 
@@ -151,13 +153,13 @@ function draw() {
 }
 
 // Randomize background color
-function mousePressed() {
-  colorIndex = floor(random(bgColor.length));
+// function mousePressed() {
+//   colorIndex = floor(random(bgColor.length));
   
-  if (colorIndex == bgColor.length) {
-    colorIndex = 0;
-  }
-}
+//   if (colorIndex == bgColor.length) {
+//     colorIndex = 0;
+//   }
+// }
 
 function applyDither(val, x, y, threshold1) {
   switch (ditherType) {
@@ -232,21 +234,15 @@ function randomEmoji(){
   let y = random(20, height - 20);
   
   //if its emoji no sticker if its not emoji then sticker
-  let raduradu = floor(random(10)); // 0 or 1: sticker, 2: emoji
+  let raduradu = floor(random(7)); // 0 or 1: sticker, 2: emoji
 
   if (raduradu === 0) {
-    stk1.resize(130,0);
-    drawLayer.image(stk1, x, y);
-  } else if (raduradu === 1) {
-    stk2.resize(130,0);
     drawLayer.image(stk2, x, y);
-  } else if (raduradu === 2) {
-    drawLayer.image(stk3, x, y,50,50);
+  } else if (raduradu === 1) {
+    drawLayer.image(stk3, x, y);
   } else if (raduradu === 3) {
     drawLayer.image(stk4, x, y);
   } else if (raduradu === 4) {
-    drawLayer.image(stk5, x, y);
-  } else if (raduradu === 5) {
     drawLayer.image(stk6, x, y);
   } else {
     let emoji = random(fkCoolEmoji);
@@ -291,8 +287,10 @@ function frameRadu() {
 function retakeCam(){
   drawLayer.clear();
   isCaptured = false;
+  colorIndex = (colorIndex + 1) % bgColor.length;
   video = createCapture(VIDEO);
   video.size(width, height);
   video.hide();
 
 }
+
