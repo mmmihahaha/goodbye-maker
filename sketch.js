@@ -80,7 +80,7 @@ frames = [frame1, frame2, frame3, frame4];
   brushSlider.position(margin+140, 490);  
   brushSlider.style('width', '80px');
 
-  coolEmoji = createButton('Spice')
+  coolEmoji = createButton('Emoji')
   coolEmoji.position(margin, 600);
   coolEmoji.size(100);
   coolEmoji.mousePressed(randomEmoji);
@@ -90,7 +90,7 @@ frames = [frame1, frame2, frame3, frame4];
   frame.size(100);
   frame.mousePressed(frameRadu);
 
-  input = createInput("goodbye :')")
+  input = createInput("text here ;)")
   input.position(1500, 300);
   input.size(100);
   input.style('height', '40px');
@@ -152,15 +152,6 @@ function draw() {
 
 }
 
-// Randomize background color
-// function mousePressed() {
-//   colorIndex = floor(random(bgColor.length));
-  
-//   if (colorIndex == bgColor.length) {
-//     colorIndex = 0;
-//   }
-// }
-
 function applyDither(val, x, y, threshold1) {
   switch (ditherType) {
     case 'none':
@@ -184,9 +175,8 @@ function applyDither(val, x, y, threshold1) {
 
 function captureFrame() {
   isCaptured = true;
-  captureImage = get(); // Copy current canvas into image
+  captureImage = get(); 
   video.remove();      
-
 }
 
 function brushDraw() {
@@ -254,26 +244,6 @@ function randomEmoji(){
     pop();
   }
 }
-
-// function frameRadu(){
-
-//   let frameradu = floor(random(4));
-
-//   if (frameradu === 0){
-//     drawLayer.clear();
-//     drawLayer.image(frame1,0,0);
-//   } else if (frameradu === 1){
-//     drawLayer.clear();
-//     drawLayer.image(frame2,0,0);
-//   } else if (frameradu === 2){
-//     drawLayer.clear();
-//     drawLayer.image(frame3,0,0);
-//   }
-//   else {
-//     drawLayer.clear();
-//     drawLayer.image(frame4,0,0);
-//   }
-// }
 
 function frameRadu() {
   currentFrameIndex = (currentFrameIndex + 1) % frames.length;

@@ -20,11 +20,12 @@ canvas {
 
 h1{
   text-align: center;
+  color:#E91E63;
   font-size: 4em;
   font-weight: 400;
   line-height: 10%;
   font-family: 'ojuju';
-  letter-spacing: 0.3em;
+  letter-spacing: 0.1em;
   margin-top:20;
 }
 
@@ -39,9 +40,9 @@ h4{
 
 
 button {
-  font-family: 'ojuju';
-  font-weight: 250;
-  font-size: 1.2em;
+  font-family: 'ojuju', 'bold';
+  font-weight: bold;
+  font-size: 1.5em;
   width: 100px; 
   height: 100px;
   padding: 0;
@@ -54,6 +55,7 @@ button {
   justify-content: center;
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
+  cursor: pointer;
   
 }
 
