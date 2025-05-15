@@ -14,13 +14,13 @@ let brushSize = 3;
 let brushSlider;
 let brushOn = false;
 
-let bgColor = ["#E91E63", "rgb(94,200,229)", "rgb(255, 232, 0)", "rgb(255, 116, 119)"];
+let bgColor = ["#E91E63", "rgb(94,200,229)", "rgb(255, 232, 0)", "rgb(255, 116, 119)", "#8ACE00"];
 let colorIndex = 0;
 let brushColor = ["#E91E63", "rgb(94,200,229)", "rgb(255, 232, 0)", "rgb(255, 116, 119)","rgb(255,255,255)"];
 let brushIndex = 0;
 let fkCoolEmoji = ["✨", "💔", "🌈", "🍒","💗", "💐", "🌸", "🌻"];
 
-let drawLayer;
+let drawLayer; 
 let font;
 
 let margin = 150;
@@ -37,6 +37,8 @@ function preload(){
   stk3 = loadImage("stk3.png");
   stk4 = loadImage("stk4.png");
   stk5 = loadImage("stk5.png");
+  stk6 = loadImage("stk6.png")
+
   frame1 = loadImage("frame1.png");
   frame2 = loadImage("frame2.png");
   frame3 = loadImage("frame3.png");
@@ -233,8 +235,10 @@ function randomEmoji(){
   let raduradu = floor(random(10)); // 0 or 1: sticker, 2: emoji
 
   if (raduradu === 0) {
+    stk1.resize(130,0);
     drawLayer.image(stk1, x, y);
   } else if (raduradu === 1) {
+    stk2.resize(130,0);
     drawLayer.image(stk2, x, y);
   } else if (raduradu === 2) {
     drawLayer.image(stk3, x, y,50,50);
@@ -242,6 +246,8 @@ function randomEmoji(){
     drawLayer.image(stk4, x, y);
   } else if (raduradu === 4) {
     drawLayer.image(stk5, x, y);
+  } else if (raduradu === 5) {
+    drawLayer.image(stk6, x, y);
   } else {
     let emoji = random(fkCoolEmoji);
     push();
