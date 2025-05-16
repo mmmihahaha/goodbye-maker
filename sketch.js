@@ -1,15 +1,14 @@
 //A postcard generator that allow cam, brush, text, and frame
 //A fun way to capture photo with people you love 
 
-
+  //Selfie cam stuff
 let video;
 let ditherType = 'bayer';
 const PIXEL_JUMP = 1;
-
-let captureBtn, saveBtn, coolEmoji;
 let isCaptured = false;
 let captureImage;
 
+  //Drawing canvas stuff
 let brushSize = 3;
 let brushSlider;
 let brushOn = false;
@@ -25,8 +24,8 @@ let font;
 
 let margin = 150;
 let frameLayer;
-let currentFrameIndex = -1; // start with -1 to mean no frame
-let frames = []; // will hold the 4 frames
+let currentFrameIndex = -1; // no frame
+let frames = []; 
 
 
 function preload(){
@@ -46,23 +45,21 @@ function preload(){
 }
 
 function setup() {
-  createCanvas(320 * 3- 30, 240 * 3);
+  createCanvas(320 * 3 - 30, 240 * 3);
   pixelDensity(1);
   drawLayer = createGraphics(width, height);
   drawLayer.clear();
   frameLayer = createGraphics(width, height);
   frameLayer.clear();
+  frames = [frame1, frame2, frame3, frame4];
 
-// store frame images in an array for easy cycling
-frames = [frame1, frame2, frame3, frame4];
-
-  // webcam
+  // Selfie set up cam
   video = createCapture(VIDEO);
   video.size(width, height);
   video.hide();
   noStroke();
 
-  // buttons
+  // Buttons
   capture = createButton('Snap!');
   capture.size(100)
   capture.position(margin, 300);
@@ -95,7 +92,6 @@ frames = [frame1, frame2, frame3, frame4];
   input.size(100);
   input.style('height', '40px');
   textAlign(CENTER, BASELINE);  
-
   
   retake = createButton('Again!');
   retake.position(1500, 450);
@@ -113,24 +109,26 @@ frames = [frame1, frame2, frame3, frame4];
 
 function draw() {
   if (isCaptured && captureImage) {
-    image(captureImage, 0, 0); // Show the still image
-    image(drawLayer, 0, 0); // Draw persistent strokes on top
-    image(frameLayer, 0, 0); // Draw the frame on top of brush & cam
-    brushDraw();               
-    forYouMsg();
+    image(captureImage, 0, 0); // captured photo here 
+    image(drawLayer, 0, 0); // brush layer 
+    image(frameLayer, 0, 0); // frame layer
+    brushDraw(); // allow brush drawing              
+    forYouMsg(); // add text
     return;
   }
   
 
-//   // Dithering selfie
+// Selfie filter
   background(255); 
   video.loadPixels();
 
   let dither = map(mouseX, 0, width, 0, 255);
 
   push();
-  translate(width, 0);
-  scale(-1, 1); // Flip cam
+  translate(width, 0); // flip cam (mirror)
+  scale(-1, 1); 
+
+  //brightness mirror but make it bayer dithering
 
   for (let y = 0; y < video.height; y += PIXEL_JUMP) {
     for (let x = 0; x < video.width; x += PIXEL_JUMP) {
@@ -223,8 +221,8 @@ function randomEmoji(){
   let x = random(20, width - 20);
   let y = random(20, height - 20);
   
-  //if its emoji no sticker if its not emoji then sticker
-  let raduradu = floor(random(7)); // 0 or 1: sticker, 2: emoji
+
+  let raduradu = floor(random(7)); 
 
   if (raduradu === 0) {
     drawLayer.image(stk2, x, y);
@@ -247,7 +245,6 @@ function randomEmoji(){
 
 function frameRadu() {
   currentFrameIndex = (currentFrameIndex + 1) % frames.length;
-  
   // Clear just the frame layer, not the drawing layer
   frameLayer.clear();
   frameLayer.image(frames[currentFrameIndex], 0, 0);
